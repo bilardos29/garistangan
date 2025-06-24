@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palm Reading Prompt Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f2f2f2;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 700px;
+      margin: auto;
+    }
+    label, select, input, textarea, button {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    #output {
+      margin-top: 20px;
+      background: #fafafa;
+      padding: 15px;
+      border-radius: 8px;
+      white-space: pre-wrap;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Palm Reading Prompt Generator 🔮</h2>
+    
+    <label for="focus">Fokus Pembacaan:</label>
+    <select id="focus">
+      <option value="Umum">Kepribadian Umum</option>
+      <option value="Cinta">Percintaan</option>
+      <option value="Karier">Karier dan Potensi</option>
+      <option value="Masa Depan">Masa Depan</option>
+      <option value="Spiritual">Spiritualitas</option>
+    </select>
+
+    <label for="style">Gaya Bahasa:</label>
+    <select id="style">
+      <option value="Tradisional">Tradisional dan Spiritualitas</option>
+      <option value="Psikologis">Psikologi Modern</option>
+      <option value="Lucu">Lucu dan Ringan</option>
+      <option value="Puisi">Penuh Metafora / Puisi</option>
+    </select>
+
+    <label for="handType">Jenis Tangan (Opsional):</label>
+    <select id="handType">
+      <option value="Tidak Ditentukan">-</option>
+      <option value="Api">Api (penuh semangat)</option>
+      <option value="Air">Air (sensitif & intuitif)</option>
+      <option value="Udara">Udara (analitis & sosial)</option>
+      <option value="Tanah">Tanah (praktis & stabil)</option>
+    </select>
+
+    <label for="imageLink">Link Gambar Tangan (Opsional):</label>
+    <input type="text" id="imageLink" placeholder="https://...">
+
+    <button onclick="generatePrompt()">Buat Prompt 📜</button>
+
+    <div id="output"></div>
+  </div>
+
+  <script>
+    function generatePrompt() {
+      const focus = document.getElementById('focus').value;
+      const style = document.getElementById('style').value;
+      const handType = document.getElementById('handType').value;
+      const imageLink = document.getElementById('imageLink').value;
+
+      let prompt = `Saya mengunggah gambar telapak tangan. Tolong lakukan pembacaan garis tangan berdasarkan prinsip palmistry.\n\n`;
+
+      if (handType !== "Tidak Ditentukan") {
+        prompt += `Jenis tangan: ${handType}.\n`;
+      }
+
+      if (imageLink.trim()) {
+        prompt += `Gambar tangan: ${imageLink}\n\n`;
+      }
+
+      prompt += `Fokus pembacaan: ${focus}.\n`;
+      prompt += `Gunakan gaya bahasa: ${style}.\n\n`;
+
+      prompt += `Tolong analisis:\n- Garis kehidupan\n- Garis kepala\n- Garis hati\n- Garis takdir dan matahari (jika ada)\n- Gunung-gunung di telapak tangan\n\nTutup dengan kesimpulan tentang kepribadian dan potensi hidup. Jangan lupa tampilkan dengan gaya ${style.toLowerCase()}.`;
+
+      document.getElementById("output").innerText = prompt;
+    }
+  </script>
+</body>
+</html>
